@@ -482,6 +482,38 @@ struct ventaAsientos consultarA()
     fclose(ptrArchivo);
 };
 
+// ********************STRUCT CONSULTAR VUELO DISPONIBLE********************
+
+struct registroAvion consultarV();
+struct registroAvion consultarV(){
+    
+struct registroAvion cVuelo;
+
+    FILE *ptrArchivo = NULL;
+    
+    
+    
+    ptrArchivo = fopen("EI_prueba.dat", "rb");
+        if(ptrArchivo != NULL)
+        {
+            fread(&cVuelo, sizeof(cVuelo), 1, ptrArchivo);
+            while( !feof(ptrArchivo) && cVuelo.nAsientos > 0 )
+            {
+                printf("\n***********************************************\n");
+                printf("\t ID: %d\n", cVuelo.idVuelo);
+                printf("\t ORIGEN: %s\n", cVuelo.origen);
+                printf("\t DESTINO: %s\n", cVuelo.destino);
+                printf("\t HORARIO: %s\n", cVuelo.horario);
+                printf("\t ASIENTOS: %d\n", cVuelo.nAsientos);
+                printf("***********************************************\n\n");
+                fread(&cVuelo, sizeof(cVuelo), 1, ptrArchivo);
+            }
+        }
+    
+        fclose(ptrArchivo);
+
+};
+
 // ********************MAIN DONDE SE EJECUTAN LOS STRUCTS********************
 
 int main()
@@ -508,8 +540,8 @@ int main()
         printf(" * 4-. Modificar venta se asiento                         *\n");
         printf(" * 5-. Consultar asiento vendido                          *\n");
         printf(" * 6-. Consultar vuelo disponible                         *\n");
-        printf(" * 6-. Consultar asientos disponibles en todos los vuelos *\n");
-        printf(" * 7-. Salir del programa                                 *\n");
+        printf(" * 7-. Consultar asientos disponibles en todos los vuelos *\n");
+        printf(" * 8-. Salir del programa                                 *\n");
         printf(" **********************************************************\n\n");
         printf("Introduce la opcion que deseas ejecutar: ");
         scanf("%d", &opcion);
@@ -575,6 +607,8 @@ int main()
             printf("******** CONSULTAR VUELO DISPONIBLE  ***********\n");
             printf("************************************************\n\n");
 
+            consultarV();
+            
             break;
 
         case 7:
@@ -592,11 +626,10 @@ int main()
 
         default:
 
-            printf("\nLa opcion seleccionada no existe ¿Desea ejecutarlo de nuevo (y/n)?\n");
-            scanf("%c", seguir);
+            printf("\nLa opcion seleccionada no existe, intente nuevamente\n");
 
             break;
         }
 
-    } while (seguir != 'n');
+    } while (seguir != 'n'/*opcion<=0 || opcion>=9*/);
 }
