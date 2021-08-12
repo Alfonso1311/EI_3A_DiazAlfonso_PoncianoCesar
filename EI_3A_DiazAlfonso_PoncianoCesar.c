@@ -198,7 +198,7 @@ struct registroAvion modificarV()
 
                         case 5:
 
-                            printf("Modificar registro vuelo\n\n");
+                            printf("Modificar registro \n\n");
 
                             printf("ID: %d\n", mVuelo.idVuelo);
 
