@@ -70,23 +70,12 @@ struct registroAvion modificarV()
     FILE *ptrArchivo = NULL;
 
     int codigo;
-    int encontrar, opcion;
+    int encontrar=0, opcion;
 
     do
     {
-
-        printf(" ***************************\n");
-        printf(" * 1-. Todos los registros *\n");
-        printf(" * 2-. Origen              *\n");
-        printf(" * 3-. Destino             *\n");
-        printf(" * 4-. Horario             *\n");
-        printf(" * 5-. N. Asientos         *\n");
-        printf(" ***************************\n\n");
-        printf("Que registro desea modificar?: ");
-        scanf("%d", &opcion);
-
-        if (opcion > 0 && opcion < 8)
-        {
+        //
+        
 
             ptrArchivo = fopen("EI_prueba.dat", "r+b");
 
@@ -99,7 +88,7 @@ struct registroAvion modificarV()
                 scanf("%d", &codigo);
 
                 fread(&mVuelo, sizeof(mVuelo), 1, ptrArchivo);
-                while (!feof(ptrArchivo))
+                while (!feof(ptrArchivo) && encontrar==0)
                 {
 
                     if (codigo == mVuelo.idVuelo)
@@ -112,127 +101,142 @@ struct registroAvion modificarV()
                         printf("\t ASIENTOS: %d\n", mVuelo.nAsientos);
                         printf("***********************************************\n\n");
 
-                        switch (opcion)
+                        printf(" ***************************\n");
+                        printf(" * 1-. Todos los registros *\n");
+                        printf(" * 2-. Origen              *\n");
+                        printf(" * 3-. Destino             *\n");
+                        printf(" * 4-. Horario             *\n");
+                        printf(" * 5-. N. Asientos         *\n");
+                        printf(" ***************************\n\n");
+                        printf("Que registro desea modificar?: ");
+                        scanf("%d", &opcion);
+
+                        if (opcion > 0 && opcion < 8)
                         {
 
-                        case 1:
+                            switch (opcion)
+                            {
 
-                            printf("Modificar todos los registros del vuelo\n\n");
+                            case 1:
 
-                            printf("ID: %d\n", mVuelo.idVuelo);
+                                printf("Modificar todos los registros del vuelo\n\n");
 
-                            printf("Origen: ");
-                            scanf("%s%*c", mVuelo.origen);
+                                printf("ID: %d\n", mVuelo.idVuelo);
 
-                            printf("Destino: ");
-                            scanf("%s%*c", mVuelo.destino);
+                                printf("Origen: ");
+                                scanf("%s%*c", mVuelo.origen);
 
-                            printf("Horario: ");
-                            scanf("%s%*c", mVuelo.horario);
+                                printf("Destino: ");
+                                scanf("%s%*c", mVuelo.destino);
 
-                            printf("N. Asientos: ");
-                            scanf("%d%*c", &mVuelo.nAsientos);
+                                printf("Horario: ");
+                                scanf("%s%*c", mVuelo.horario);
 
-                            long pos = ftell(ptrArchivo) - sizeof(mVuelo);
-                            fseek(ptrArchivo, pos, SEEK_SET);
-                            fwrite(&mVuelo, sizeof(mVuelo), 1, ptrArchivo);
-                            printf("\nDatos actualizados correctamente\n\n");
+                                printf("N. Asientos: ");
+                                scanf("%d%*c", &mVuelo.nAsientos);
 
-                            encontrar++;
+                                long pos = ftell(ptrArchivo) - sizeof(mVuelo);
+                                fseek(ptrArchivo, pos, SEEK_SET);
+                                fwrite(&mVuelo, sizeof(mVuelo), 1, ptrArchivo);
+                                printf("\nDatos actualizados correctamente\n\n");
 
-                            break;
+                                encontrar=1;
 
-                        case 2:
+                                break;
 
-                            printf("Modificar registro de vuelo\n\n");
+                            case 2:
 
-                            printf("ID: %d\n", mVuelo.idVuelo);
+                                printf("Modificar registro de vuelo\n\n");
 
-                            printf("Origen: ");
-                            scanf("%s%*c", mVuelo.origen);
+                                printf("ID: %d\n", mVuelo.idVuelo);
 
-                            long pos1 = ftell(ptrArchivo) - sizeof(mVuelo);
-                            fseek(ptrArchivo, pos1, SEEK_SET);
-                            fwrite(&mVuelo, sizeof(mVuelo), 1, ptrArchivo);
-                            printf("\nDatos actualizados correctamente\n\n");
+                                printf("Origen: ");
+                                scanf("%s%*c", mVuelo.origen);
 
-                            encontrar++;
+                                long pos1 = ftell(ptrArchivo) - sizeof(mVuelo);
+                                fseek(ptrArchivo, pos1, SEEK_SET);
+                                fwrite(&mVuelo, sizeof(mVuelo), 1, ptrArchivo);
+                                printf("\nDatos actualizados correctamente\n\n");
 
-                            break;
+                                encontrar=1;
 
-                        case 3:
+                                break;
 
-                            printf("Modificar registro de vuelo\n\n");
+                            case 3:
 
-                            printf("ID: %d\n", mVuelo.idVuelo);
+                                printf("Modificar registro de vuelo\n\n");
 
-                            printf("Destino: ");
-                            scanf("%s%*c", mVuelo.destino);
+                                printf("ID: %d\n", mVuelo.idVuelo);
 
-                            long pos2 = ftell(ptrArchivo) - sizeof(mVuelo);
-                            fseek(ptrArchivo, pos2, SEEK_SET);
-                            fwrite(&mVuelo, sizeof(mVuelo), 1, ptrArchivo);
-                            printf("\nDatos actualizados correctamente\n\n");
+                                printf("Destino: ");
+                                scanf("%s%*c", mVuelo.destino);
 
-                            encontrar++;
+                                long pos2 = ftell(ptrArchivo) - sizeof(mVuelo);
+                                fseek(ptrArchivo, pos2, SEEK_SET);
+                                fwrite(&mVuelo, sizeof(mVuelo), 1, ptrArchivo);
+                                printf("\nDatos actualizados correctamente\n\n");
 
-                            break;
+                                encontrar=1;
 
-                        case 4:
+                                break;
 
-                            printf("Modificar registro vuelo\n\n");
+                            case 4:
 
-                            printf("ID: %d\n", mVuelo.idVuelo);
+                                printf("Modificar registro vuelo\n\n");
 
-                            printf("Horario: ");
-                            scanf("%s%*c", mVuelo.horario);
+                                printf("ID: %d\n", mVuelo.idVuelo);
 
-                            long pos3 = ftell(ptrArchivo) - sizeof(mVuelo);
-                            fseek(ptrArchivo, pos3, SEEK_SET);
-                            fwrite(&mVuelo, sizeof(mVuelo), 1, ptrArchivo);
-                            printf("\nDatos actualizados correctamente\n\n");
+                                printf("Horario: ");
+                                scanf("%s%*c", mVuelo.horario);
 
-                            encontrar++;
+                                long pos3 = ftell(ptrArchivo) - sizeof(mVuelo);
+                                fseek(ptrArchivo, pos3, SEEK_SET);
+                                fwrite(&mVuelo, sizeof(mVuelo), 1, ptrArchivo);
+                                printf("\nDatos actualizados correctamente\n\n");
 
-                            break;
+                                encontrar=1;
 
-                        case 5:
+                                break;
 
-                            printf("Modificar registro \n\n");
+                            case 5:
 
-                            printf("ID: %d\n", mVuelo.idVuelo);
+                                printf("Modificar registro vuelo\n\n");
 
-                            printf("N. Asientos: ");
-                            scanf("%d%*c", &mVuelo.nAsientos);
+                                printf("ID: %d\n", mVuelo.idVuelo);
 
-                            long pos4 = ftell(ptrArchivo) - sizeof(mVuelo);
-                            fseek(ptrArchivo, pos4, SEEK_SET);
-                            fwrite(&mVuelo, sizeof(mVuelo), 1, ptrArchivo);
-                            printf("\nDatos actualizados correctamente\n\n");
+                                printf("N. Asientos: ");
+                                scanf("%d%*c", &mVuelo.nAsientos);
 
-                            encontrar++;
+                                long pos4 = ftell(ptrArchivo) - sizeof(mVuelo);
+                                fseek(ptrArchivo, pos4, SEEK_SET);
+                                fwrite(&mVuelo, sizeof(mVuelo), 1, ptrArchivo);
+                                printf("\nDatos actualizados correctamente\n\n");
 
-                            break;
+                                encontrar=1;
+
+                                break;
+                            }
                         }
+                        else
+                        {
+                            printf("\nLa opcion no existe, intentelo de nuevo\n\n");
+                        }
+                    }
+                    else //(encontrar == 0)
+                    {
+                        printf("\nNo existe ningun vuelo con esta clave\n");
                     }
 
                     fread(&mVuelo, sizeof(mVuelo), 1, ptrArchivo);
                 }
 
-                if (encontrar == 0)
-                {
-                    printf("\nNo existe ningun vuelo con esta clave\n");
-                }
+                
 
                 //}while(encontrar==0);
             }
 
             fclose(ptrArchivo);
-        }
-        else
-        {
-            printf("\nLa opcion no existe, intentelo de nuevo\n\n");
-        }
+       
 
     } while (opcion <= 0 || opcion >= 10);
 };
