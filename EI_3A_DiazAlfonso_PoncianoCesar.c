@@ -4,6 +4,8 @@
 
 // ********************STRUCT PRINCIPAL********************
 
+//#define numAsientos 20;
+
 struct registroAvion
 {
     int idVuelo;
@@ -27,27 +29,36 @@ struct ventaAsientos
 struct registroAvion capturarV();
 struct registroAvion capturarV()
 {
+    int i, idVuelo2[10], nAsientos2[10];
+    char origen2[50][50], destino2[50][50], destino[50][50];
 
     struct registroAvion registroVuelo;
 
     FILE *ptrArchivo = NULL;
 
-    printf("Introduce ID de vuelo: ");
-    scanf("%d%*c", &registroVuelo.idVuelo);
+    for (i = 0; i < 1; i++)
+    {
 
-    printf("Introduce el origen del vuelo: ");
-    scanf("%[^\n]%*c", registroVuelo.origen);
+        printf("Introduce ID de vuelo: ");
+        scanf("%d%*c", &registroVuelo.idVuelo);
 
-    printf("Introduce el destino del vuelo: ");
-    scanf("%[^\n]%*c", registroVuelo.destino);
+        printf("Introduce el origen del vuelo: ");
+        scanf("%[^\n]%*c", registroVuelo.origen);
+        strcpy(origen2[i], registroVuelo.origen);
 
-    printf("Introduce el horario del vuelo: ");
-    scanf("%[^\n]%*c", registroVuelo.horario);
+        printf("Introduce el destino del vuelo: ");
+        scanf("%[^\n]%*c", registroVuelo.destino);
+        strcpy(destino2[i], registroVuelo.destino);
 
-    printf("Numero de asientos del vuelo: ");
-    scanf("%d%*c", &registroVuelo.nAsientos);
+        printf("Introduce el horario del vuelo: ");
+        scanf("%[^\n]%*c", registroVuelo.horario);
+        strcpy(origen2[i], registroVuelo.origen);
 
-    ptrArchivo = fopen("EI_prueba.dat", "ab");
+        printf("Numero de asientos del vuelo: ");
+        scanf("%d%*c", &registroVuelo.nAsientos);
+    }
+
+    ptrArchivo = fopen("EI_3A_DiazAlfonso_PoncianoCesar_vuelos.dat", "ab");
 
     if (ptrArchivo != NULL)
     {
@@ -77,7 +88,7 @@ struct registroAvion modificarV()
     {
         //
 
-        ptrArchivo = fopen("EI_prueba.dat", "r+b");
+        ptrArchivo = fopen("EI_3A_DiazAlfonso_PoncianoCesar_vuelos.dat", "r+b");
 
         if (ptrArchivo != NULL)
         {
@@ -216,6 +227,14 @@ struct registroAvion modificarV()
 
                             break;
                         }
+
+                        printf("\n***********************************************\n");
+                        printf("\t ID: %d\n", mVuelo.idVuelo);
+                        printf("\t ORIGEN: %s\n", mVuelo.origen);
+                        printf("\t DESTINO: %s\n", mVuelo.destino);
+                        printf("\t HORARIO: %s\n", mVuelo.horario);
+                        printf("\t ASIENTOS: %d\n", mVuelo.nAsientos);
+                        printf("***********************************************\n\n");
                     }
                     else
                     {
@@ -245,24 +264,33 @@ struct ventaAsientos capturarA();
 struct ventaAsientos capturarA()
 {
 
+    int i, idAsiento2[10], idVuelo2[10];
+    char nombre2[50][50], apellido2[50][50];
+
     struct ventaAsientos registroAsiento;
     //struct registroAvion Vuelo;
 
     FILE *ptrArchivo = NULL;
 
-    printf("Introduce ID de asiento: ");
-    scanf("%d%*c", &registroAsiento.idAsiento);
+    for (i = 0; i < 1; i++)
+    {
 
-    printf("Introduce el nombre del pasajero: ");
-    scanf("%[^\n]%*c", registroAsiento.nombre);
+        printf("Introduce ID de asiento: ");
+        scanf("%d%*c", &registroAsiento.idAsiento);
 
-    printf("Introduce apellido del pasajero: ");
-    scanf("%[^\n]%*c", registroAsiento.apellidos);
+        printf("Introduce el nombre del pasajero: ");
+        scanf("%[^\n]%*c", registroAsiento.nombre);
+        strcpy(nombre2[i], registroAsiento.nombre);
 
-    printf("Introduce ID de vuelo: ");
-    scanf("%d%*c", &registroAsiento.idVuelo);
+        printf("Introduce apellido del pasajero: ");
+        scanf("%[^\n]%*c", registroAsiento.apellidos);
+        strcpy(apellido2[i], registroAsiento.apellidos);
 
-    ptrArchivo = fopen("EI_pruebaPasajeros.dat", "ab");
+        printf("Introduce ID de vuelo: ");
+        scanf("%d%*c", &registroAsiento.idVuelo);
+    }
+
+    ptrArchivo = fopen("EI_3A_DiazAlfonso_PoncianoCesar_pasajeros.dat", "ab");
 
     if (ptrArchivo != NULL)
     {
@@ -292,7 +320,7 @@ struct ventaAsientos modificarA()
     {
         //
 
-        ptrArchivo = fopen("EI_pruebaPasajeros.dat", "r+b");
+        ptrArchivo = fopen("EI_3A_DiazAlfonso_PoncianoCesar_pasajeros.dat", "r+b");
 
         if (ptrArchivo != NULL)
         {
@@ -412,6 +440,13 @@ struct ventaAsientos modificarA()
 
                             break;
                         }
+
+                        printf("\n***********************************************\n");
+                        printf("\t ID ASIENTO: %d\n", mAsiento.idAsiento);
+                        printf("\t NOMBRE: %s\n", mAsiento.nombre);
+                        printf("\t APELLIDO: %s\n", mAsiento.apellidos);
+                        printf("\t ID VUELO: %d\n", mAsiento.idVuelo);
+                        printf("***********************************************\n\n");
                     }
                     else
                     {
@@ -448,7 +483,7 @@ struct ventaAsientos consultarA()
     int codigo;
     int encontrar = 0;
 
-    ptrArchivo = fopen("EI_pruebaPasajeros.dat", "rb");
+    ptrArchivo = fopen("EI_3A_DiazAlfonso_PoncianoCesar_pasajeros.dat", "rb");
 
     if (ptrArchivo != NULL)
     {
@@ -485,33 +520,65 @@ struct ventaAsientos consultarA()
 // ********************STRUCT CONSULTAR VUELO DISPONIBLE********************
 
 struct registroAvion consultarV();
-struct registroAvion consultarV(){
-    
-struct registroAvion cVuelo;
+struct registroAvion consultarV()
+{
+
+    struct registroAvion cVuelo;
 
     FILE *ptrArchivo = NULL;
-    
-    
-    
-    ptrArchivo = fopen("EI_prueba.dat", "rb");
-        if(ptrArchivo != NULL)
-        {
-            fread(&cVuelo, sizeof(cVuelo), 1, ptrArchivo);
-            while( !feof(ptrArchivo) && cVuelo.nAsientos > 0 )
-            {
-                printf("\n***********************************************\n");
-                printf("\t ID: %d\n", cVuelo.idVuelo);
-                printf("\t ORIGEN: %s\n", cVuelo.origen);
-                printf("\t DESTINO: %s\n", cVuelo.destino);
-                printf("\t HORARIO: %s\n", cVuelo.horario);
-                printf("\t ASIENTOS: %d\n", cVuelo.nAsientos);
-                printf("***********************************************\n\n");
-                fread(&cVuelo, sizeof(cVuelo), 1, ptrArchivo);
-            }
-        }
-    
-        fclose(ptrArchivo);
 
+    ptrArchivo = fopen("EI_3A_DiazAlfonso_PoncianoCesar_vuelos.dat", "rb");
+    if (ptrArchivo != NULL)
+    {
+        fread(&cVuelo, sizeof(cVuelo), 1, ptrArchivo);
+        while (!feof(ptrArchivo) && cVuelo.nAsientos > 0)
+        {
+            printf("\n***********************************************\n");
+            printf("\t ID: %d\n", cVuelo.idVuelo);
+            printf("\t ORIGEN: %s\n", cVuelo.origen);
+            printf("\t DESTINO: %s\n", cVuelo.destino);
+            printf("\t HORARIO: %s\n", cVuelo.horario);
+            printf("\t ASIENTOS: %d\n", cVuelo.nAsientos);
+            printf("***********************************************\n\n");
+            /*
+            printf("\n***********************************************\n");
+            printf("\t ID ASIENTO: %d\n", cAsiento.idAsiento);
+            printf("\t NOMBRE: %s\n", cAsiento.nombre);
+            printf("\t APELLIDO: %s\n", cAsiento.apellidos);
+            printf("\t ID VUELO: %d\n", cAsiento.idVuelo);
+            printf("***********************************************\n\n");*/
+            fread(&cVuelo, sizeof(cVuelo), 1, ptrArchivo);
+        }
+    }
+
+    fclose(ptrArchivo);
+};
+
+// ********************STRUCT CONSULTAR ASIENTO DISPONIBLE DE VUELOS DISPONIBLES********************
+
+struct registroAvion consultarV();
+struct registroAvion consultarV()
+{
+
+    struct registroAvion cVuelo;
+
+    FILE *ptrArchivo = NULL;
+
+    ptrArchivo = fopen("EI_3A_DiazAlfonso_PoncianoCesar_vuelos.dat", "rb");
+    if (ptrArchivo != NULL)
+    {
+        fread(&cVuelo, sizeof(cVuelo), 1, ptrArchivo);
+        while (!feof(ptrArchivo) && cVuelo.nAsientos > 0)
+        {
+            printf("\n***********************************************\n");
+            printf("\t ID: %d\n", cVuelo.idVuelo);
+            printf("\t ASIENTOS: %d\n", cVuelo.nAsientos);
+            printf("***********************************************\n\n");
+            fread(&cVuelo, sizeof(cVuelo), 1, ptrArchivo);
+        }
+    }
+
+    fclose(ptrArchivo);
 };
 
 // ********************MAIN DONDE SE EJECUTAN LOS STRUCTS********************
@@ -608,7 +675,7 @@ int main()
             printf("************************************************\n\n");
 
             consultarV();
-            
+
             break;
 
         case 7:
@@ -631,5 +698,5 @@ int main()
             break;
         }
 
-    } while (seguir != 'n'/*opcion<=0 || opcion>=9*/);
+    } while (seguir != 'n' /*opcion<=0 || opcion>=9*/);
 }
